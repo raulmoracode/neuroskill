@@ -9,7 +9,7 @@ Same skill. Clearer.
 **Install**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/raulmoracode/neuroskill/main/public/adhd-remix.md -o ~/Downloads/adhd-remix.md
+curl -fsSL https://raw.githubusercontent.com/raulmoracode/neuroskill/main/public/SKILL.md -o ~/Downloads/adhd-remix.md
 ```
 
 **Use**
