@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 12%;
+    --primary: 24 94% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 24 100% 96%;
+    --secondary-foreground: 20 14% 12%;
+    --muted: 24 20% 94%;
+    --muted-foreground: 24 6% 45%;
+    --accent: 24 94% 94%;
+    --accent-foreground: 20 14% 12%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 24 30% 88%;
+    --input: 24 30% 88%;
+    --ring: 24 94% 53%;
+    --radius: 0.75rem;
+    --chart-1: 24 94% 53%;
+    --chart-2: 17 88% 58%;
+    --chart-3: 32 95% 60%;
+    --chart-4: 24 30% 88%;
+    --chart-5: 20 14% 12%;
+  }
+  .dark {
+    --background: 20 14% 6%;
+    --foreground: 24 100% 97%;
+    --card: 20 14% 8%;
+    --card-foreground: 24 100% 97%;
+    --popover: 20 14% 8%;
+    --popover-foreground: 24 100% 97%;
+    --primary: 24 94% 53%;
+    --primary-foreground: 20 14% 6%;
+    --secondary: 20 10% 15%;
+    --secondary-foreground: 24 100% 97%;
+    --muted: 20 10% 15%;
+    --muted-foreground: 24 6% 65%;
+    --accent: 20 10% 15%;
+    --accent-foreground: 24 100% 97%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 20 10% 15%;
+    --input: 20 10% 15%;
+    --ring: 24 94% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  ::selection {
+    background: #f97316;
+    color: white;
+  }
+}
+
+/* ADHD-friendly: remove walls, keep rhythm */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
