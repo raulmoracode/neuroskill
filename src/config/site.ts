@@ -1,6 +1,6 @@
 export const siteConfig = {
   installCommand:
-    "mkdir -p ~/.claude/skills/tdah-remix && curl -fsSL https://raw.githubusercontent.com/raulmoracode/neuroskill/main/SKILL.md -o ~/.claude/skills/tdah-remix/SKILL.md",
+    "curl -fsSL https://raw.githubusercontent.com/raulmoracode/neuroskill/main/public/adhd-remix.md -o ~/Downloads/adhd-remix.md",
   githubUrl: "https://github.com/raulmoracode/neuroskill",
 } as const;
 
