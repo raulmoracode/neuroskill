@@ -1,7 +1,11 @@
-import "./App.css";
+import { Hero } from "@/components/custom";
 
-function App() {
-  return <div>hello</div>;
+export default function App() {
+  return (
+    <div className="site-shell">
+      <main className="site-width">
+        <Hero />
+      </main>
+    </div>
+  );
 }
-
-export default App;
