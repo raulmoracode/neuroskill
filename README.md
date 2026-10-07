@@ -1,6 +1,28 @@
 # neuroskill
 
-This is a **React + Vite** project generated with [`@raulmoracode/create`](https://github.com/raulmoracode/raulmoracode-create).
+Same skill. Clearer read.
+
+`neuroskill` rewrites any skill into an ADHD-friendly version. The logic, tools and constraints stay
+exactly the same; only the communication changes — shorter, more scannable, no walls of text.
+
+This repo is the **React + Vite** site and the skill definition behind it, scaffolded with
+[`@raulmoracode/create`](https://github.com/raulmoracode/raulmoracode-create).
+
+## Install
+
+```bash
+npx skills add raulmoracode/neuroskill
+```
+
+## Use
+
+```bash
+/neuroskill remix this skill /your-skill
+```
+
+Both commands live in `src/config/site.ts` (`installCommand` and `usageCommand`) and are what the
+landing renders. The skill definition itself is `public/SKILL.md`, served as-is, so the install
+command downloads it straight from the deployed site.
 
 ## Requirements
 
@@ -29,6 +51,7 @@ pnpm dev
 
 - **React 19.3.0 + Vite 8.3.1 + TypeScript 7.0.2** — exact versions, no `^` or `~`
 - **Tailwind CSS 4.3.3** — CSS-first configuration (`@import "tailwindcss"` in `src/index.css`)
+- **lucide-react 0.577.0** — icons (`Copy`, `Check`, `Github` in the copy blocks)
 - **shadcn** — `components.json` + `cn()` helper (`src/lib/utils.ts`)
 - **Biome 2.5.14** — formatter, linter and organize imports
 - **Vitest 5.0.2 + Testing Library** — tests run in `jsdom`
@@ -43,11 +66,14 @@ No components are preinstalled. Add yours from the private registry:
 pnpm dlx shadcn@4.21.0 add @raulmoracode/<component>
 ```
 
-Browse the catalogue at https://registry.raulmoracode.com. After adding components, normalize their style with Biome (the shadcn CLI uses its own formatting):
+They land in `src/components/ui/`. Browse the catalogue at https://registry.raulmoracode.com. After
+adding components, normalize their style with Biome (the shadcn CLI uses its own formatting):
 
 ```bash
 pnpm exec biome check --write .
 ```
+
+The landing components in `src/components/custom/` are hand-written and not from the registry.
 
 ## Git workflow
 
@@ -58,6 +84,20 @@ pnpm exec biome check --write .
 feat: add user profile
 fix: handle invalid input
 ```
+
+## Styling
+
+`src/index.css` uses a deliberate hybrid strategy:
+
+- **At the top, inside `@layer base`** — the shadcn theme tokens (`--background`, `--foreground`,
+  `--primary`, `--radius`, …) plus the landing palette (`--paper`, `--ink`, `--signal`, `--rule`).
+  They sit in Tailwind's cascade layer so components added from the registry can still be themed.
+- **At the bottom, outside any cascade layer** — the landing styles themselves: `.site-shell`,
+  `.site-width`, `.hero`, `.copy-code`, `.copy-button`, `.link-button` and `.site-credit`. Unlayered
+  CSS beats any `@layer`, so these always win over Tailwind's base layer.
+
+`biome.json` disables the formatter, linter and assist actions for `src/index.css`, so that file
+keeps its hand-written formatting.
 
 ## Continuous integration
 
@@ -75,11 +115,15 @@ Deployment is manual: once CI passes, deploy to your preferred hosting provider.
 `src/config/site.ts` is the single place to change how this site presents itself:
 
 - `title` — the browser tab title
-- `description` — empty by default; filling it adds the meta description and the preview text
+- `description` — the meta description and the preview text shown when the link is shared; it
+  currently holds the landing copy ("A shorter version of any skill. Same logic. Same tools. Fewer
+  words.") and is editable in the same way
 - `favicon` — the icon in the tab
 - `socialImage` and `socialImageAlt` — the image shown when the link is shared
   (`socialImage` accepts either a local path such as `/imagen.png`, served from `public/`,
   or a full URL)
+- `installCommand`, `usageCommand`, `githubUrl`, `authorUrl` and `shareUrl` — the copy blocks and
+  links the landing renders (`shareUrl` is the deployed landing address)
 - `author`, `twitter`, `locale`, `themeColor` and `url` (the canonical URL once deployed)
 
 Empty values are never rendered: no blank meta tag is emitted.
@@ -98,19 +142,23 @@ Change it there and both follow: nothing has to be edited in `index.html` or `la
 ## Project structure
 
 ```text
-├── index.html            # tab title + favicon (raulmoracode branding)
+├── index.html            # font preconnects + Archivo stylesheet (head tags are injected)
+├── public/
+│   └── SKILL.md          # skill definition served for `npx skills add`
 ├── .github/workflows/    # CI (install, check, test, build)
 ├── src/
 │   ├── main.tsx     # entry point
-│   ├── App.tsx      # root component
-│   ├── index.css    # Tailwind entry point
-│   ├── App.css      # root styles
-│   ├── components/  # shadcn components land here
+│   ├── App.tsx      # mounts the landing shell
+│   ├── index.css    # Tailwind entry point + landing styles
+│   ├── components/
+│   │   ├── custom/  # landing components (hero.tsx, copy-block.tsx)
+│   │   └── ui/      # registry components land here
 │   ├── hooks/       # registry hooks land here
 │   ├── lib/         # cn() in utils.ts
 │   ├── config/
-│   │   └── site.ts  # site identity
-│   └── test/        # smoke test
+│   │   ├── index.ts # barrel re-exporting site.ts
+│   │   └── site.ts  # site identity and landing commands
+│   └── test/        # setup.ts + smoke.test.tsx + landing.test.tsx
 ├── components.json       # shadcn config (includes the @raulmoracode registry)
 ├── .husky/               # Git hooks
 ├── commitlint.config.ts  # commit message validation
@@ -125,5 +173,6 @@ Change it there and both follow: nothing has to be edited in `index.html` or `la
 
 ## Links
 
+- Site: [neuroskill.raulmoracode.com](https://neuroskill.raulmoracode.com)
 - [raulmoracode.com](https://raulmoracode.com)
 - Repository: [github.com/raulmoracode/neuroskill](https://github.com/raulmoracode/neuroskill)
