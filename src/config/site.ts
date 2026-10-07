@@ -10,7 +10,8 @@
 export const site = {
   name: "neuroskill",
   title: "neuroskill",
-  description: "",
+  description:
+    "A shorter version of any skill. Same logic. Same tools. Fewer words.",
   url: "",
   favicon: "https://cdn.raulmoracode.com/icons/favicon.ico",
   socialImage: "/imagen.png",
@@ -19,4 +20,9 @@ export const site = {
   twitter: "@raulmoracode",
   locale: "es_ES",
   themeColor: "#ffffff",
+  installCommand: "npx skills add raulmoracode/neuroskill",
+  usageCommand: "/neuroskill remix this skill /your-skill",
+  githubUrl: "https://github.com/raulmoracode/neuroskill",
+  authorUrl: "https://raulmoracode.com",
+  shareUrl: "https://neuroskill.raulmoracode.com",
 } as const;

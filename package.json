@@ -27,6 +27,7 @@
   },
   "packageManager": "pnpm@12.6.0",
   "dependencies": {
+    "lucide-react": "0.577.0",
     "radix-ui": "1.7.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
